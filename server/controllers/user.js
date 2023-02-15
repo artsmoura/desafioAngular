@@ -14,9 +14,11 @@ export const getUsersUni = (req, res) => {
 };
 
 export const getUsersMen = (req, res) => {
-    const q = `SELECT u.cod_usuario, u.txt_nome_completo, ig.nomeIgreja 
-                FROM tab_dados_usuario as u, inscricao as i, igreja as ig
-                WHERE i.idUsuario = u.cod_usuario and i.idEvento = 33 and u.idIgreja = ig.idIgreja and i.excluido != 1 and u.bln_sexo = 1`;
+
+    const q = `SELECT u.cod_usuario, u.txt_nome_completo, ig.nomeIgreja
+    FROM tab_dados_usuario as u, inscricao as i, igreja as ig
+    WHERE  u.txt_nome_completo LIKE '%${req.query.name}%' and i.idUsuario = u.cod_usuario and i.idEvento = 33 
+    and u.idIgreja = ig.idIgreja and i.excluido != 1 and u.bln_sexo = 1`;;
 
     db.query(q, (error, data) => {
         if (error) return res.json(error);

@@ -7,7 +7,7 @@ const searchInicialState = {
 };
 
 const inicialState = {
-    users: {},
+    users: [],
     search: searchInicialState
 };
 
@@ -16,7 +16,7 @@ export default (state = inicialState, { type, payload }) => {
         case ALL_USERS_LOAD:
             return {
                 ...state,
-                users: payload
+                users: [...payload]
             };
         case UPDATE_SEARCH_USER:
             return {

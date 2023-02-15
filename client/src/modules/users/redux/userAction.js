@@ -4,14 +4,15 @@ import * as api from '../../../api/index';
 export const ALL_USERS_LOAD = "ALL_USERS_LOAD";
 export const UPDATE_SEARCH_USER = "UPDATE_SEARCH_USER";
 
-export const listAllUsers = () => async (dispatch) => {
+export const listAllUsers = (user) => async (dispatch) => {
+    console.log(user);
     try {
-        const { data } = await api.getAllUsers();
+        const { data } = await api.getAllUsers(user);
         dispatch({
             type: ALL_USERS_LOAD,
             payload: data
         });
-        toast.success("Usuarios Listados");
+        // toast.success("Usuarios Listados");
     } catch (error) {
         toast.error("Erro ao listar usuarios");
     }

@@ -2,20 +2,20 @@ import { Box, Button, ButtonGroup, FormControl, FormLabel, Heading, Input, Selec
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearPollInput, updatePollContentCreate } from "../redux/pollAction";
+import { clearPollInput, createPoll, updatePollContentCreate } from "../redux/pollAction";
 
 const CreatePoll = () => {
 
     const dispatch = useDispatch();
-    const poll = useSelector((state) => state.pollReducer.poll);
+    const poll = useSelector((state) => state.pollState.poll);
     const [cancelButton, setCancelButton] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(e);
-        // dispatch(createPoll(event));
+    const handleSubmit = () => {
+        dispatch(createPoll(poll));
     };
+
+    console.log(poll);
 
     useEffect(() => {
         if (cancelButton === true) {
@@ -37,7 +37,7 @@ const CreatePoll = () => {
             <Heading fontSize='xl'>Criar Categoria</Heading>
             <Box p='6'>
                 <Stack spacing={3}>
-                    <form onSubmit={handleSubmit}>
+                    <form method="POST" onSubmit={handleSubmit}>
                         <FormControl isRequired>
                             <FormLabel>Nome da Categoria</FormLabel>
                             <Input
@@ -60,7 +60,7 @@ const CreatePoll = () => {
                                 <option>Ambos</option>
                             </Select>
                         </FormControl>
-                        <FormControl isRequired>
+                        {/* <FormControl isRequired>
                             <FormLabel>Data de Início da Votação</FormLabel>
                             <Input
                                 name="inicialPollDate"
@@ -69,14 +69,14 @@ const CreatePoll = () => {
                                 value={poll.inicialPollDate}
                                 type="datetime-local"
                             />
-                        </FormControl>
+                        </FormControl> */}
                         <FormControl isRequired>
                             <FormLabel>Descrição da Categoria</FormLabel>
                             <Textarea
-                                name="descriptionPoll"
+                                name="description"
                                 placeholder="Descrição da Categoria"
                                 onChange={handleInputChange}
-                                value={poll.endPollDate}
+                                value={poll.description}
                                 size='sm'
                             />
                         </FormControl>
@@ -89,7 +89,6 @@ const CreatePoll = () => {
                             <Button
                                 type='submit'
                                 colorScheme='blue'
-                                onClick={handleSubmit}
                             >
                                 Save
                             </Button>

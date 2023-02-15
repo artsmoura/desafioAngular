@@ -1,10 +1,9 @@
-import { CLEAR_POLL_INPUT, UPDATE_POOL_CONTENT_CREATE } from "./pollAction";
+import { CLEAR_POLL_INPUT, POLL_CREATE_SUCCESS, UPDATE_POOL_CONTENT_CREATE } from "./pollAction";
 
 const pollInicialState = {
     categoryName: "",
     genderPoll: "",
-    inicialPollDate: "",
-    endPollDate: "",
+    description: ""
 };
 
 const inicialState = {
@@ -21,6 +20,14 @@ export default (state = inicialState, action) => {
                     ...state.poll,
                     [action.payload.target.name]: action.payload.target.value
                 }
+            };
+        case POLL_CREATE_SUCCESS:
+            return {
+                ...state,
+                polls: [
+                    ...state.polls,
+                    action.payload
+                ]
             };
         case CLEAR_POLL_INPUT:
             return inicialState;

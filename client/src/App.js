@@ -17,7 +17,7 @@ function App() {
         <MyMenu />
         <Routes>
           <Route path="/resultados" element={''} />
-          <Route path="/criarvotacao" element={<CreatePoll />} />
+          <Route path="/poll" element={<CreatePoll />} />
           <Route path="/" element={<Poll />} />
           <Route path="/poll" element={<PollContent />} />
         </Routes>

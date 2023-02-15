@@ -52,7 +52,7 @@ const MyMenu = () => {
                             </Box>
 
                             <Box>
-                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => handleClick(e)}>
+                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => navigate('/poll')}>
                                     Criar Votação
                                 </Button>
                             </Box>

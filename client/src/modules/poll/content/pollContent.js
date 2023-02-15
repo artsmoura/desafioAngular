@@ -2,33 +2,26 @@ import { Box, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, Drawer
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listAllUsers, updateSearchUser } from "../../users/redux/userAction";
+import debounce from 'lodash.debounce';
 
 const PollContent = (props) => {
 
     const dispatch = useDispatch();
 
-    const search = useSelector((state) => state.userState.search);
-    const users = useSelector((state) => state.pollState.users) ?? [];
+    const [search, setSearch] = useState('');
+
+    // const search = useSelector((state) => state.userState.search);
+    const users = useSelector((state) => state.userState.users);
 
     useEffect(() => {
         dispatch(listAllUsers());
-    }, [dispatch]);
+    }, []);
 
     const handleSearch = (e) => {
-        dispatch(updateSearchUser(e));
-        let itemFilter = users.txt_nome_completo;
-        let searchMin = search.value;
-        if (itemFilter.includes(searchMin)) {
-            console.log('entrou?');
-        }
+        debounce(() => setSearch(e.target.value), 400)();
     };
 
-    const usersFiltrados = [];
-    /* var userForFilter = users.filter();
-   userForFilter.forEach(user => {
-       console.log('ue');
-   }); */
-
+    const filteredUsers = users.filter(user => user['txt_nome_completo'].toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "").includes(search.toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "")));
 
     return (
         <Stack>
@@ -38,8 +31,8 @@ const PollContent = (props) => {
                 <DrawerHeader>{`Categoria`}</DrawerHeader>
                 <DrawerBody>
                     <Input
-                        name={'userSearch'}
-                        onChange={(e) => handleSearch(e)}
+                        name={'txt_nome_completo'}
+                        onChange={handleSearch}
                         placeholder='Buscar Usuario'
                         value={search.value}
                     >
@@ -53,12 +46,12 @@ const PollContent = (props) => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {usersFiltrados?.map((user) => {
-                                    <Tr>
-                                        <Td>{user?.txt_nome_completo}</Td>
-                                        <Td>{user?.nomeIgreja}</Td>
-                                    </Tr>;
-                                })}
+                                {filteredUsers.map((user) => (
+                                    <Tr key={user.cod_usuario}>
+                                        <Td>{user.txt_nome_completo}</Td>
+                                        <Td>{user.nomeIgreja}</Td>
+                                    </Tr>
+                                ))}
                             </Tbody>
                         </Table>
                     </TableContainer>
