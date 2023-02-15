@@ -34,7 +34,7 @@ const CreatePoll = () => {
 
     return (
         <Box p={5} shadow='md' borderWidth='1px'>
-            <Heading fontSize='xl'>Criar Votação</Heading>
+            <Heading fontSize='xl'>Criar Categoria</Heading>
             <Box p='6'>
                 <Stack spacing={3}>
                     <form onSubmit={handleSubmit}>

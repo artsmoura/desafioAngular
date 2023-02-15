@@ -1,16 +1,30 @@
-import { ALL_USERS_LOAD } from "./userAction";
+import { ALL_USERS_LOAD, UPDATE_SEARCH_USER } from "./userAction";
 
 
-const inicialState = {
-    usuarios: []
+const searchInicialState = {
+    tipo: '',
+    value: ''
 };
 
-export default (state = inicialState, action) => {
-    switch (action.type) {
+const inicialState = {
+    users: {},
+    search: searchInicialState
+};
+
+export default (state = inicialState, { type, payload }) => {
+    switch (type) {
         case ALL_USERS_LOAD:
             return {
                 ...state,
-                usuarios: action.payload
+                users: payload
+            };
+        case UPDATE_SEARCH_USER:
+            return {
+                ...state,
+                search: {
+                    ...state.search,
+                    value: payload.target.value
+                }
             };
         default:
             return state;

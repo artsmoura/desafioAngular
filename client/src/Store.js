@@ -3,10 +3,10 @@ import logger from 'redux-logger';
 import pollReducer from './modules/poll/redux/pollReducer';
 import userReducer from './modules/users/redux/userReducer';
 
-export const store = configureStore({
+export default configureStore({
     reducer: {
-        userReducer: userReducer,
-        pollReducer: pollReducer,
+        userState: userReducer,
+        pollState: pollReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,

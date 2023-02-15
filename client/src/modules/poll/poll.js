@@ -1,7 +1,24 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Heading, Stack } from "@chakra-ui/react";
-import React from "react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Drawer, Heading, Stack, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { listAllUsers } from "../users/redux/userAction";
+import PollContent from "./content/pollContent";
 
 const Poll = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const handleClick = () => {
+        onOpen();
+    };
+
+    const handleNavigate = () => {
+        handleClick();
+    };
+
     return (
         <Box p={5} shadow='md' borderWidth='1px'>
             <Heading>Categorias Em Votação</Heading>
@@ -24,12 +41,20 @@ const Poll = () => {
                                     veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                                     commodo consequat.
                                 </Box>
-                                <Button w='20%'>Acessar</Button>
+                                <Button w='20%' onClick={handleNavigate}>Acessar</Button>
                             </Stack>
                         </AccordionPanel>
                     </AccordionItem>
                 </Accordion>
             </Box>
+            <Drawer
+                onClose={onClose}
+                isOpen={isOpen}
+                size='full'
+
+            >
+                <PollContent />
+            </Drawer>
         </Box>
     );
 };

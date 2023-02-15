@@ -6,6 +6,7 @@ import MyMenu from './components/menu/menu';
 import { Route, Routes } from 'react-router-dom';
 import CreatePoll from './modules/poll/formPoll/createPoll';
 import Poll from './modules/poll/poll';
+import PollContent from './modules/poll/content/pollContent';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/resultados" element={''} />
           <Route path="/criarvotacao" element={<CreatePoll />} />
           <Route path="/" element={<Poll />} />
+          <Route path="/poll" element={<PollContent />} />
         </Routes>
       </Flex>
       <ToastContainer
