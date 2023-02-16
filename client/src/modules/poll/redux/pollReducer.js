@@ -1,4 +1,4 @@
-import { CLEAR_POLL_INPUT, POLL_CREATE_SUCCESS, UPDATE_POOL_CONTENT_CREATE } from "./pollAction";
+import { ALL_POLLS_LOAD, CLEAR_POLL_FOR_VOTE, CLEAR_POLL_INPUT, POLL_CREATE_SUCCESS, SET_POLL_FOR_VOTE, SET_VOTE, UPDATE_POOL_CONTENT_CREATE, VOTED_SUCCESS } from "./pollAction";
 
 const pollInicialState = {
     categoryName: "",
@@ -8,7 +8,9 @@ const pollInicialState = {
 
 const inicialState = {
     poll: pollInicialState,
-    polls: {}
+    polls: [],
+    pollForVote: [],
+    vote: {}
 };
 
 export default (state = inicialState, action) => {
@@ -28,6 +30,32 @@ export default (state = inicialState, action) => {
                     ...state.polls,
                     action.payload
                 ]
+            };
+        case ALL_POLLS_LOAD:
+            return {
+                ...state,
+                polls: [...action.payload]
+            };
+        case SET_POLL_FOR_VOTE:
+            return {
+                ...state,
+                pollForVote: action.payload
+            };
+        case SET_VOTE:
+            return {
+                ...state,
+                vote: action.payload
+            };
+        case CLEAR_POLL_FOR_VOTE:
+            return {
+                ...state,
+                pollForVote: [],
+                vote: {}
+            };
+        case VOTED_SUCCESS:
+            return {
+                ...state,
+                inicialState
             };
         case CLEAR_POLL_INPUT:
             return inicialState;

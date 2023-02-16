@@ -1,7 +1,9 @@
 import { db } from '../db.js';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import crypto from 'crypto';
+
+dotenv.config();
 
 export const getUsersUni = (req, res) => {
     const q = "SELECT u.cod_usuario, u.txt_nome_completo, ig.nomeIgreja FROM tab_dados_usuario as u, inscricao as i, igreja as ig WHERE i.idUsuario = u.cod_usuario and i.idEvento = 33 and u.idIgreja = ig.idIgreja and i.excluido != 1";
@@ -46,9 +48,9 @@ export const login = (req, res) => {
         if (error) return res.json(error);
         if (data.length === 0) return res.status(404).json('Usuario não encontrado');
 
-        const checkPassword = bcrypt.compare(req.body.txt_senha, data[0].txt_senha);
+        const loginPassword = crypto.createHash('md5').update(req.body.txt_senha).digest('hex');
 
-        if (!checkPassword) return res.status(400).json("Usuario ou senha incorretos");
+        if (loginPassword !== data[0].txt_senha) return res.status(400).json("Usuario ou senha incorretos");
 
         const token = jwt.sign({
             id: data[0].cod_usuario

@@ -1,25 +1,28 @@
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Box, ChakraProvider, Flex, VStack } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 import MyMenu from './components/menu/menu';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import CreatePoll from './modules/poll/formPoll/createPoll';
 import Poll from './modules/poll/poll';
-import PollContent from './modules/poll/content/pollContent';
+import Results from './modules/poll/results/results';
+import Login from './modules/users/login/login';
 
 
 function App() {
 
+  const userLogin = localStorage.getItem('profile');
+
   return (
-    <VStack p={5}>
+    <VStack>
       <Flex w='100%' direction='column'>
         <MyMenu />
         <Routes>
-          <Route path="/resultados" element={''} />
-          <Route path="/poll" element={<CreatePoll />} />
-          <Route path="/" element={<Poll />} />
-          <Route path="/poll" element={<PollContent />} />
+          <Route path="/poll" element={<Poll />} />
+          <Route path="/resultados" element={<Results />} />
+          <Route path="/createpoll" element={<CreatePoll />} />
+          <Route path="/" element={<Login />} />
         </Routes>
       </Flex>
       <ToastContainer
