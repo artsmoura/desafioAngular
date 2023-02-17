@@ -6,11 +6,10 @@ import debounce from 'lodash.debounce';
 import { setVote, voteSubmit } from "../redux/pollAction";
 import { CheckIcon } from "@chakra-ui/icons";
 
-const PollContent = () => {
+const PollContent = (props) => {
 
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
-    const { onClose } = useDisclosure();
 
     // const search = useSelector((state) => state.userState.search);
     const users = useSelector((state) => state.userState.users);
@@ -34,7 +33,7 @@ const PollContent = () => {
             idUsuario: poll.vote.cod_usuario,
             poll_id: poll.pollForVote.id
         }));
-        window.location.reload(false);
+        props.closeAction();
     };
 
     const filteredUsers = users.filter(user => user['txt_nome_completo'].toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "").includes(search.toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "")));

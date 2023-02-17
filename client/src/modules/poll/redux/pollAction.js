@@ -31,6 +31,7 @@ export const createPoll = (poll) => async (dispatch) => {
             type: POLL_CREATE_SUCCESS,
             payload: data
         });
+        toast.success("Votação criada com sucesso");
     } catch (error) {
         toast.error('Erro ao criar votação');
     }
@@ -43,6 +44,7 @@ export const deletePoll = (id) => async (dispatch) => {
             type: POLL_DELETE_SUCCESS,
             payload: data
         });
+        toast.success("Votação Deletada");
     } catch (error) {
         toast.error('Erro ao deletar votação');
     }
@@ -90,7 +92,7 @@ export const clearPollForVote = () => (dispatch) => {
 };
 
 export const voteSubmit = (vote) => async (dispatch) => {
-    console.log(vote);
+
     try {
         const { data } = await api.sendVote(vote);
         dispatch({
@@ -105,7 +107,7 @@ export const voteSubmit = (vote) => async (dispatch) => {
 };
 
 export const seePollResult = (id) => async (dispatch) => {
-    console.log(id);
+
     try {
         const { data } = await api.seePollResult(id);
         dispatch({

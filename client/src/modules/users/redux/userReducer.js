@@ -1,4 +1,4 @@
-import { ALL_USERS_LOAD, LOGIN_SUCCESS, LOGOUT, SET_USER_SELECT, UPDATE_SEARCH_USER } from "./userAction";
+import { ALL_USERS_LOAD, LOGIN_SUCCESS, LOGOUT, SET_USER, SET_USER_SELECT, UPDATE_SEARCH_USER } from "./userAction";
 
 
 const searchInicialState = {
@@ -55,6 +55,12 @@ export default (state = inicialState, { type, payload }) => {
             return {
                 ...state,
                 user: []
+            };
+        case SET_USER:
+            const userStorage = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : [];
+            return {
+                ...state,
+                user: userStorage
             };
         default:
             return state;

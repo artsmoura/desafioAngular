@@ -8,22 +8,24 @@ import CreatePoll from './modules/poll/formPoll/createPoll';
 import Poll from './modules/poll/poll';
 import Results from './modules/poll/results/results';
 import Login from './modules/users/login/login';
+import ProtectedRoute from './protectedRoute';
 
 
 function App() {
-
-  const userLogin = localStorage.getItem('profile');
 
   return (
     <VStack>
       <Flex w='100%' direction='column'>
         <MyMenu />
         <Routes>
-          <Route path="/poll" element={<Poll />} />
-          <Route path="/resultados" element={<Results />} />
-          <Route path="/createpoll" element={<CreatePoll />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/result/:id" element={<Results />} />
+          <Route path="/" element={<Poll />} />
+          <Route path='/createpoll' element={<ProtectedRoute />}>
+            <Route path="/createpoll" element={<CreatePoll />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path='/result/:id' element={<ProtectedRoute />}>
+            <Route path="/result/:id" element={<Results />} />
+          </Route>
         </Routes>
       </Flex>
       <ToastContainer
@@ -33,10 +35,10 @@ function App() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </VStack>
   );

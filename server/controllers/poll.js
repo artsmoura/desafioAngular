@@ -72,6 +72,16 @@ export const createPoll = (req, res) => {
 
 };
 
-// export const deletePoll = (req, res) => {
-//     const q =
-// }
+export const deletePoll = (req, res) => {
+    const q = `DELETE polls, pollVotes FROM polls
+                INNER JOIN
+                pollVotes ON pollVotes.poll_id = polls.id 
+                WHERE
+                polls.id = ?`;
+
+    db.query(q, [req.params.id], (error, data) => {
+        if (error) return res.json(error);
+
+        return res.status(200).json('Votação Deletada!');
+    });
+};

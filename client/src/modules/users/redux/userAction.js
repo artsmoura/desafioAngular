@@ -6,6 +6,7 @@ export const UPDATE_SEARCH_USER = "UPDATE_SEARCH_USER";
 export const SET_USER_SELECT = "SET_USER_SELECT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
+export const SET_USER = "SET_USER";
 
 export const listAllUsers = (poll) => async (dispatch) => {
 
@@ -54,3 +55,9 @@ export const login = (loginForm) => async (dispatch) => {
 export const logout = () => ({
     type: LOGOUT
 });
+
+export const setUser = () => async (dispatch) => {
+    dispatch({
+        type: SET_USER
+    });
+};

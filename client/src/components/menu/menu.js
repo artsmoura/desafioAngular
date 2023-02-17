@@ -62,14 +62,8 @@ const MyMenu = () => {
                     <DrawerBody>
                         <Stack spacing='24px'>
                             <Box>
-                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => navigate('/poll')}>
+                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => navigate('/')}>
                                     Inicio
-                                </Button>
-                            </Box>
-
-                            <Box>
-                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => handleClick(e)}>
-                                    Resultados
                                 </Button>
                             </Box>
 
@@ -95,7 +89,7 @@ const MyMenu = () => {
             <Button
                 ref={ref}
                 colorScheme='whatsapp'
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/login')}
                 aria-label='Options'
             >
                 Entrar

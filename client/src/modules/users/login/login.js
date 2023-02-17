@@ -17,7 +17,7 @@ const Login = () => {
         },
         onSubmit: (values, action) => {
             dispatch(login(values));
-            navigate('/poll');
+            navigate('/');
             action.resetForm();
         }
     });

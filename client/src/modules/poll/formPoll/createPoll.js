@@ -1,8 +1,8 @@
-import { Box, Button, ButtonGroup, FormControl, FormLabel, Heading, Input, Select, Stack, StackDivider, Textarea, VStack } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, FormControl, FormLabel, Heading, Input, Select, Stack, Textarea } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearPollInput, createPoll, updatePollContentCreate } from "../redux/pollAction";
+import { clearPollInput, createPoll } from "../redux/pollAction";
 import { useFormik } from "formik";
 
 const CreatePoll = () => {
@@ -17,6 +17,7 @@ const CreatePoll = () => {
         onSubmit: (values, action) => {
             dispatch(createPoll(values));
             action.resetForm();
+            navigate('/');
         }
     });
 
@@ -24,10 +25,6 @@ const CreatePoll = () => {
     const poll = useSelector((state) => state.pollState.poll);
     const [cancelButton, setCancelButton] = useState(false);
     const navigate = useNavigate();
-
-    const handleSubmit = () => {
-        dispatch(createPoll(poll));
-    };
 
     useEffect(() => {
         if (cancelButton === true) {
@@ -40,12 +37,8 @@ const CreatePoll = () => {
         setCancelButton(true);
     };
 
-    const handleInputChange = (e) => {
-        dispatch(updatePollContentCreate(e));
-    };
-
     return (
-        <Box p={5} shadow='md' borderWidth='1px'>
+        <Box p={5} m={10} shadow='md' borderWidth='1px' borderRadius={10}>
             <Heading fontSize='xl'>Criar Categoria</Heading>
             <Box p='6'>
                 <Stack as="form" spacing={3} onSubmit={formik.handleSubmit}>
