@@ -7,14 +7,15 @@ export const SET_USER_SELECT = "SET_USER_SELECT";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
 
-export const listAllUsers = (user) => async (dispatch) => {
+export const listAllUsers = (poll) => async (dispatch) => {
+
     try {
-        const { data } = await api.getAllUsers(user);
+        const { data } = poll.includes('Ambos') ? await api.getAllUsers() : poll.includes('Masculino') ? await api.getUsersMen() : await api.getUsersWom();
         dispatch({
             type: ALL_USERS_LOAD,
             payload: data
         });
-        // toast.success("Usuarios Listados");
+        toast.success("Usuarios Listados");
     } catch (error) {
         toast.error("Erro ao listar usuarios");
     }

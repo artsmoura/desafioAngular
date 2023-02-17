@@ -1,32 +1,37 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { seePollResult } from "../redux/pollAction";
 
 const Results = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    let { id } = useParams();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(seePollResult(id));
+    }, []);
+
+    const result = useSelector((state) => state.pollState.results);
+
+    let resultNames = [];
+    result.map((r) => {
+        resultNames.push(r.txt_nome_completo);
+    });
+
+    function mode(arr) {
+        return arr.sort((a, b) =>
+            arr.filter(v => v === a).length
+            - arr.filter(v => v === b).length
+        ).pop();
+    }
 
     return (
-        <>
-            <Button onClick={onOpen}>Open Modal</Button>
+        <Box>
+            <Heading>{mode(resultNames)}</Heading>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.
-                        Sunt ad dolore quis aute consequat. Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                    </ModalBody>
-
-                    <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant='ghost'>Secondary Action</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
+        </Box>
     );
 };
 

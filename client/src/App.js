@@ -23,6 +23,7 @@ function App() {
           <Route path="/resultados" element={<Results />} />
           <Route path="/createpoll" element={<CreatePoll />} />
           <Route path="/" element={<Login />} />
+          <Route path="/result/:id" element={<Results />} />
         </Routes>
       </Flex>
       <ToastContainer

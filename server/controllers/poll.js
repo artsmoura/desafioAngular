@@ -40,14 +40,15 @@ export const votePoll = (req, res) => {
 };
 
 export const result = (req, res) => {
+
     const q = `SELECT u.txt_nome_completo, ig.nomeIgreja
                 FROM pollVotes as pv, tab_dados_usuario as u, igreja as ig
                 WHERE pv.poll_id = (?) and pv.idUsuario = u.cod_usuario and u.idIgreja = ig.idIgreja;`;
 
-    db.query(q, req.query.id, (error, data) => {
+    db.query(q, [req.params.id], (error, data) => {
         if (error) return res.json(error);
 
-        return res.status(200).json;
+        return res.status(200).json(data);
     });
 
 };
@@ -72,5 +73,5 @@ export const createPoll = (req, res) => {
 };
 
 // export const deletePoll = (req, res) => {
-//     const q = 
+//     const q =
 // }

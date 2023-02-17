@@ -11,6 +11,7 @@ export const SET_POLL_FOR_VOTE = "SET_POLL_FOR_VOTE";
 export const SET_VOTE = "SET_VOTE";
 export const CLEAR_POLL_FOR_VOTE = "CLEAR_POLL_FOR_VOTE";
 export const VOTED_SUCCESS = "VOTED_SUCCESS";
+export const RESULT_LOAD_SUCCESS = "RESULT_LOAD_SUCCESS";
 
 export const updatePollContentCreate = e => async (dispatch) => {
     dispatch({
@@ -100,5 +101,19 @@ export const voteSubmit = (vote) => async (dispatch) => {
         toast.success("Voto contabilizado!");
     } catch (error) {
         toast.error("Aconteceu algum problema, tente novamente");
+    }
+};
+
+export const seePollResult = (id) => async (dispatch) => {
+    console.log(id);
+    try {
+        const { data } = await api.seePollResult(id);
+        dispatch({
+            type: RESULT_LOAD_SUCCESS,
+            payload: data
+        });
+        toast.success("Votos carregados");
+    } catch (error) {
+        toast.error(error.response.data);
     }
 };

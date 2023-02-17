@@ -31,7 +31,7 @@ const MyMenu = () => {
         <Stack
             w='100%' borderWidth='1px' h='50px' marginBottom='10px'
             justify='space-between' alignItems='center' direction={user.txt_usuario ? 'row1' : 'row-reverse'}
-            p={0, 5}
+            pr={5} pl={5}
         >
             {user.idTipoUsuario === 1 ?
                 <Button
@@ -62,7 +62,7 @@ const MyMenu = () => {
                     <DrawerBody>
                         <Stack spacing='24px'>
                             <Box>
-                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => navigate('/')}>
+                                <Button w='100%' colorScheme='teal' variant='ghost' onClick={(e) => navigate('/poll')}>
                                     Inicio
                                 </Button>
                             </Box>

@@ -6,10 +6,12 @@ const searchInicialState = {
     value: ''
 };
 
+const userLocalStorage = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : [];
+
 const inicialState = {
     users: [],
     search: searchInicialState,
-    user: []
+    user: userLocalStorage
 };
 
 export default (state = inicialState, { type, payload }) => {

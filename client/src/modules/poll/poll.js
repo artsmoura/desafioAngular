@@ -1,7 +1,8 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Drawer, Flex, Heading, Stack, useDisclosure } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, ButtonGroup, Drawer, Flex, Heading, Stack, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { seePollResult } from "../../api";
 import { listAllUsers } from "../users/redux/userAction";
 import PollContent from "./content/pollContent";
 import { clearPollForVote, listPolls, setPollForVote } from "./redux/pollAction";
@@ -18,7 +19,6 @@ const Poll = () => {
     };
 
     const handleOnClode = () => {
-        console.log('FECHOU');
         dispatch(clearPollForVote());
         onClose();
     };
@@ -26,6 +26,10 @@ const Poll = () => {
     const handleNavigate = (poll) => {
         dispatch(setPollForVote(poll));
         handleClick();
+    };
+
+    const handleResultModal = (poll) => {
+        navigate(`/result/${poll.id}`);
     };
 
     useEffect(() => {
@@ -61,7 +65,10 @@ const Poll = () => {
                                     <Box >
                                         {poll.description}
                                     </Box>
-                                    <Button w='20%' onClick={() => handleNavigate(poll)}>Acessar</Button>
+                                    <ButtonGroup spacing='1rem'>
+                                        <Button w='20%' onClick={() => handleNavigate(poll)}>Acessar</Button>
+                                        <Button onClick={() => handleResultModal(poll)}>Resultado</Button>
+                                    </ButtonGroup>
                                 </Stack>
                             </AccordionPanel>
                         </AccordionItem>

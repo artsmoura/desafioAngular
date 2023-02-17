@@ -1,4 +1,4 @@
-import { Box, Button, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Input, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Input, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listAllUsers, setUserSelect } from "../../users/redux/userAction";
@@ -10,13 +10,14 @@ const PollContent = () => {
 
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
+    const { onClose } = useDisclosure();
 
     // const search = useSelector((state) => state.userState.search);
     const users = useSelector((state) => state.userState.users);
     const poll = useSelector((state) => state.pollState);
 
     useEffect(() => {
-        dispatch(listAllUsers());
+        dispatch(listAllUsers(poll.pollForVote.gender));
     }, []);
 
     const handleSearch = (e) => {
@@ -33,6 +34,7 @@ const PollContent = () => {
             idUsuario: poll.vote.cod_usuario,
             poll_id: poll.pollForVote.id
         }));
+        window.location.reload(false);
     };
 
     const filteredUsers = users.filter(user => user['txt_nome_completo'].toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "").includes(search.toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, "")));
