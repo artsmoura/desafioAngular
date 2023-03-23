@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 export const getAllPolls = (req, res) => {
-    const q = "SELECT * FROM polls";
+    const q = "SELECT * FROM votacao";
 
     db.query(q, (error, data) => {
         if (error) return res.json(error);
@@ -14,7 +14,7 @@ export const getAllPolls = (req, res) => {
 };
 
 export const getPoll = (req, res) => {
-    const q = "SELECT * FROM polls WHERE idPoll = ?";
+    const q = "SELECT * FROM votacao WHERE id = ?";
 
     db.query(q, (error, data) => {
         if (error) return res.json(error);
@@ -25,7 +25,7 @@ export const getPoll = (req, res) => {
 
 export const votePoll = (req, res) => {
 
-    const q = "INSERT INTO pollVotes(`idUsuario`, `poll_id`) VALUES (?)";
+    const q = "INSERT INTO votos(`usuario_id`, `votacao_id`) VALUES (?)";
 
     const values = [
         req.body.idUsuario,
@@ -55,12 +55,11 @@ export const result = (req, res) => {
 
 export const createPoll = (req, res) => {
 
-    const q = "INSERT INTO polls(`title`, `description`, `gender`) VALUES (?)";
+    const q = "INSERT INTO votacao(`titulo`, `descricao`) VALUES (?)";
 
     const values = [
-        req.body.title,
-        req.body.description,
-        req.body.gender
+        req.body.titulo,
+        req.body.descricao,
     ];
 
 
@@ -73,11 +72,11 @@ export const createPoll = (req, res) => {
 };
 
 export const deletePoll = (req, res) => {
-    const q = `DELETE polls, pollVotes FROM polls
+    const q = `DELETE votacao, votos FROM votacao
                 INNER JOIN
-                pollVotes ON pollVotes.poll_id = polls.id 
+                votos ON votos.votacao_id = votacao.id 
                 WHERE
-                polls.id = ?`;
+                votacao.id = ?`;
 
     db.query(q, [req.params.id], (error, data) => {
         if (error) return res.json(error);
