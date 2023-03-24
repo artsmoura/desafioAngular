@@ -1,1 +1,27 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="opened=!opened">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Sistema Votaçao</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="icon add" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="over">
+    <mat-list>
+      <mat-list-item>
+        <a routerLink="/votacao" style="text-decoration: none;">Inicio</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/usuario" style="text-decoration: none;">Usuarios</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <app-votacao-list class="modal-box"></app-votacao-list> -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

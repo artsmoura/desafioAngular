@@ -8,18 +8,5 @@ import { VotacaoFormDialogComponent } from './votacao-form-dialog/votacao-form-d
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(
-    public dialog: MatDialog
-  ) { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(VotacaoFormDialogComponent, {
-      width: '250px'
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    })
-
-  }
 }
