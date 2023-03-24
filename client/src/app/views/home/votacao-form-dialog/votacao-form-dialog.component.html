@@ -1,19 +1,23 @@
 <h1 mat-dialog-title>Criação de Categoria</h1>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Cancelar</button>
-</div>
+<div mat-dialog-content>
+  <form [formGroup]="votacaoForm">
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="titulo" name="titulo" placeholder="Titulo">
+      </mat-form-field>
+    </div>
 
-<!-- <form>
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Titulo</mat-label>
-      <input matInput placeholder="Titulo">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Descrição</mat-label>
-      <textarea matInput placeholder="Descrição"></textarea>
-    </mat-form-field>
-  </div>
-</form> -->
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput formControlName="descricao" name="descricao" placeholder="Descrição"></textarea>
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="createVotacao()">Criar</button>
+  <button mat-raised-button color="white" (click)="onClose()">Cancelar</button>
+</div>

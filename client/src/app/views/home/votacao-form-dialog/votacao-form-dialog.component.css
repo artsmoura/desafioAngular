@@ -1,0 +1,12 @@
+.full-input {
+  width: 100%;
+}
+
+.full-input:nth-child(1) {
+  margin-top: 10px;
+}
+
+.group-button {
+  display: flex;
+  justify-content: center;
+}

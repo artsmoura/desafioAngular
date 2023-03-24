@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { VotacaoService } from 'src/app/shared/service/votacao.service';
 
 @Component({
   selector: 'app-votacao-form-dialog',
@@ -13,6 +14,7 @@ export class VotacaoFormDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private rest: VotacaoService,
     public dialogRef: MatDialogRef<VotacaoFormDialogComponent>
   ) { }
 
@@ -23,8 +25,15 @@ export class VotacaoFormDialogComponent implements OnInit {
     });
   }
 
+  createVotacao() {
+    this.rest.postVotacao(this.votacaoForm.value).subscribe(result => { })
+    this.dialogRef.close()
+    this.votacaoForm.reset()
+  }
+
   onClose(): void {
     this.dialogRef.close()
+    this.votacaoForm.reset()
   }
 
 }
