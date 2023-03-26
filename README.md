@@ -1,11 +1,11 @@
-# Siscomoceb
+# Sistema de Votação em Angular
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/artsmoura/desafioAngular)
 ![GitHub language count](https://img.shields.io/github/languages/count/artsmoura/desafioAngular)
 
 ### Sobre
 
-> Projeto criado para um desafio em Angular 
+> Projeto criado para um desafio em Angular.
 > Esta aplicação é um sistema de votação no qual podemos criar uma categoria de votação e usuarios
 
 ### 🔨 Funcionalidades
