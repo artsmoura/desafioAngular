@@ -1,3 +1,25 @@
-/* .example-card {
-  max-width: 10px;
-} */
+.addBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 28px;
+  z-index: 2;
+}
+
+.votacao-box {
+  padding: 15px;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.btn-group button {
+  margin-right: 10px;
+}
+
+.btn-group div:nth-child(1) {
+  margin-right: 10px;
+}
+

@@ -1,20 +1,33 @@
-<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutAlign.lt-sm="center stretch"
-  style="padding: 2%;">
-  <div *ngFor="let votacao of votacaoList" style="margin: 0.5%">
-    <mat-card class="example-card" fxFlex="o.1 calc(33.3% - 11px)" fxFlex.lt-md="0 1 calc(50% - 11px)"
-      fxFlex.lt-sm="100%">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title>{{votacao.titulo}}</mat-card-title>
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content class="card-content">
-        {{votacao.descricao}}
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="deleteVotacao(votacao)">Deletar</button>
-        <button mat-raised-button color="primary" (click)="openDialog()">Abrir Votação</button>
-      </mat-card-actions>
-    </mat-card>
+<div class="votacao-box">
+  <mat-accordion *ngIf="hasVotacao === true">
+    <mat-expansion-panel *ngFor="let votacao of votacaoList" (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{votacao.titulo}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{votacao.descricao}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="btn-group">
+        <div>
+          <button mat-raised-button color="warn" (click)="deleteVotacao(votacao)">Deletar</button>
+          <button mat-raised-button color="warn" (click)="editarVotacao(votacao)">Editar</button>
+        </div>
+        <button mat-raised-button color="primary" (click)="openDialog(votacao)">Votar</button>
+        <button mat-raised-button color="accent" (click)="openVerResultado(votacao)">Resultado</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div *ngIf="hasVotacao === false" align="center">
+    <h1>Nenhuma Categoria de Votação Criada 😭</h1>
+    <p>Crie uma categoria com nome e Descrição e escolha à um usuario em quem votar</p>
   </div>
+</div>
+<div class="addBtn">
+  <button mat-fab extended color="primary" (click)="openCriaVoto()">
+    <mat-icon>add</mat-icon>
+    <span class="btn-txt">Votação</span>
+  </button>
 </div>

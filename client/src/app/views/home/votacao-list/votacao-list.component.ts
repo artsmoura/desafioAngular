@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Votacao } from 'src/app/shared/model/votacao.model';
 import { VotacaoService } from 'src/app/shared/service/votacao.service';
+import { ResultadoDialogComponent } from '../resultado-dialog/resultado-dialog.component';
+import { VotacaoFormDialogComponent } from '../votacao-form-dialog/votacao-form-dialog.component';
 import { VotoDialogComponent } from '../voto-dialog/voto-dialog.component';
 
 @Component({
@@ -12,6 +14,8 @@ import { VotoDialogComponent } from '../voto-dialog/voto-dialog.component';
 export class VotacaoListComponent implements OnInit {
 
   votacaoList: Votacao[];
+  panelOpenState = false;
+  hasVotacao = false;
 
   constructor(
     public votacaoService: VotacaoService,
@@ -19,12 +23,15 @@ export class VotacaoListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getVotacao();
+    this.getVotacoes();
   }
 
-  getVotacao() {
-    this.votacaoService.getVotacao().subscribe(data => {
+  getVotacoes() {
+    this.votacaoService.getVotacoes().subscribe(data => {
       this.votacaoList = data
+      if (this.votacaoList.length > 0) {
+        this.hasVotacao = true
+      }
     }
     )
   }
@@ -32,10 +39,27 @@ export class VotacaoListComponent implements OnInit {
   deleteVotacao(votacao: Votacao) {
     this.votacaoList = this.votacaoList.filter((e) => votacao.titulo !== e.titulo)
     this.votacaoService.deleteVotacao(votacao.id).subscribe()
+    this.refresh()
   }
 
-  openDialog(): void {
+  openDialog(votacao: Votacao): void {
+
     const dialogRef = this.dialog.open(VotoDialogComponent, {
+      width: 'calc(100vh - 30px)',
+      data: {
+        id: votacao.id,
+        titulo: votacao.titulo
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    })
+
+  }
+
+  openCriaVoto(): void {
+    const dialogRef = this.dialog.open(VotacaoFormDialogComponent, {
       minWidth: '450px',
     })
 
@@ -44,4 +68,37 @@ export class VotacaoListComponent implements OnInit {
     })
 
   }
+
+  openVerResultado(votacao: Votacao): void {
+    const dialogRef = this.dialog.open(ResultadoDialogComponent, {
+      minWidth: '450px',
+      data: {
+        id: votacao.id,
+        titulo: votacao.titulo
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    })
+
+  }
+
+  editarVotacao(votacao: Votacao) {
+    const dialogRef = this.dialog.open(VotacaoFormDialogComponent, {
+      minWidth: '450px',
+      data: {
+        id: votacao.id
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    })
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
 }
