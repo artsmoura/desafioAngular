@@ -19,3 +19,10 @@
 .table-box {
   padding: 15px;
 }
+
+.addBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 28px;
+  z-index: 2;
+}
