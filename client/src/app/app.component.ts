@@ -9,20 +9,8 @@ import { VotacaoFormDialogComponent } from './views/home/votacao-form-dialog/vot
 })
 export class AppComponent {
   title = 'client';
-  constructor(
-    public dialog: MatDialog
-  ) { }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(VotacaoFormDialogComponent, {
-      minWidth: '450px',
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    })
-
-  }
+  constructor() { }
 
   opened = false
 }

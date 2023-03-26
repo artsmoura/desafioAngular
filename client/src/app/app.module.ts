@@ -23,6 +23,13 @@ import { UsuarioListComponent } from './views/home/usuario-list/usuario-list.com
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { UsuarioFormDialogComponent } from './views/home/usuario-form-dialog/usuario-form-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ResultadoDialogComponent } from './views/home/resultado-dialog/resultado-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -32,7 +39,9 @@ import { MatTableModule } from '@angular/material/table';
     VotacaoListComponent,
     VotacaoFormDialogComponent,
     VotoDialogComponent,
-    UsuarioListComponent
+    UsuarioListComponent,
+    UsuarioFormDialogComponent,
+    ResultadoDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -52,7 +61,11 @@ import { MatTableModule } from '@angular/material/table';
     FlexLayoutModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatExpansionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

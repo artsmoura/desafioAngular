@@ -6,7 +6,8 @@ import { VotacaoListComponent } from './views/home/votacao-list/votacao-list.com
 
 const routes: Routes = [{
   path: '',
-  component: HomeComponent
+  redirectTo: '/votacao',
+  pathMatch: 'full'
 },
 {
   path: 'votacao',
