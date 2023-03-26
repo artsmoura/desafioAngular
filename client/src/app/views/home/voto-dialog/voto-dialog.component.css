@@ -1,0 +1,7 @@
+.mdc-dialog__actions {
+  overflow: auto;
+}
+
+.full-input:nth-child(1) {
+  margin-top: 10px;
+}
