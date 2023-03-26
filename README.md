@@ -5,7 +5,7 @@
 
 ### Sobre
 
-> Projeto criado para um desafio em Angular 
+> Projeto criado para um desafio em Angular.
 > Esta aplicação é um sistema de votação no qual podemos criar uma categoria de votação e usuarios
 
 ### 🔨 Funcionalidades
