@@ -15,6 +15,9 @@
 - Existe uma listagem de votações criadas e usuarios (utilização pelo menu lateral)
 - Com a possibilidade de ver qual o resultado das votações
 
+#### Banco de Dados
+> Utilize o arquivo 'querry votacao.sql' para criar o banco de dados e as tabelas.
+
 ### 💻 Tecnologias
 
 ![image](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
