@@ -20,7 +20,7 @@ export class UsuarioService {
     private httpClient: HttpClient
   ) { }
 
-  public getUsuario(): Observable<Usuario[]> {
+  public getUsuarios(): Observable<Usuario[]> {
     return this.httpClient.get<Usuario[]>(this.apiUrl)
   }
 
@@ -31,4 +31,13 @@ export class UsuarioService {
   public deleteUsuario(id: number) {
     return this.httpClient.delete<Usuario>(`${this.apiUrl}/${id}`)
   }
+
+  public getUsuario(id: number): Observable<Usuario[]> {
+    return this.httpClient.get<Usuario[]>(`${this.apiUrl}/${id}`)
+  }
+
+  public updateUsuario(id: number, usuario: Usuario): Observable<Usuario[]> {
+    return this.httpClient.put<Usuario[]>(`${this.apiUrl}/${id}`, usuario)
+  }
+
 }
