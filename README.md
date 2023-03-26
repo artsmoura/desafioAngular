@@ -1,4 +1,4 @@
-# Siscomoceb
+# Sistema de Votação em Angular
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/artsmoura/desafioAngular)
 ![GitHub language count](https://img.shields.io/github/languages/count/artsmoura/desafioAngular)
