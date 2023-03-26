@@ -1,0 +1,56 @@
+<h1 mat-dialog-title>{{tipoModal === 'editar' ? 'Edição' : 'Adição'}} de Usuários</h1>
+<div mat-dialog-content>
+  <form [formGroup]="usuarioForm">
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="nome" name="nome" placeholder="Nome">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput formControlName="sobrenome" name="sobrenome" placeholder="Sobrenome">
+      </mat-form-field>
+    </div>
+
+    <!-- <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Gênero</mat-label>
+        <input matInput formControlName="genero" name="genero" placeholder="Gênero">
+      </mat-form-field>
+    </div> -->
+
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Gênero</mat-label>
+        <mat-select formControlName="genero" name="genero" placeholder="Gênero">
+          <mat-option *ngFor="let genero of generos" [value]="genero.value">
+            {{genero.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="cidade" name="cidade" placeholder="Cidade">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="full-input">
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="estado" name="estado" placeholder="Estado">
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" *ngIf="tipoModal === 'criar'" (click)="createUsuario()">Criar</button>
+  <button mat-raised-button color="primary" *ngIf="tipoModal === 'editar'" (click)="updateUsuario()">Salvar</button>
+  <button mat-raised-button color="white" (click)="onClose()">Cancelar</button>
+</div>
